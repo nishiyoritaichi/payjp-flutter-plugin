@@ -94,8 +94,9 @@ class Payjp {
       case 'onApplePayFailedRequestToken':
         final errorInfo =
             _serializers.deserializeWith(ErrorInfo.serializer, call.arguments);
-        var message = errorInfo.errorMessage;
-        if (_onApplePayFailedRequestTokenCallback != null) {
+        var message = errorInfo?.errorMessage;
+        if (_onApplePayFailedRequestTokenCallback != null &&
+            errorInfo != null) {
           CallbackResultError result;
           final resultFutureOr =
               _onApplePayFailedRequestTokenCallback?.call(errorInfo);
